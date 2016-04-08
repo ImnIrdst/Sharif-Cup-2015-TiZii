@@ -158,52 +158,6 @@ with open('pickles/deep5000SharifCup-final.pickle', 'wb') as f:
 
 
 '''
-net = NeuralNet(
-      layers=[
-          ('input', layers.InputLayer),
-          ('conv1', Conv2DLayer),
-          ('pool1', MaxPool2DLayer),
-          ('dropout1', layers.DropoutLayer),
-          ('conv2', Conv2DLayer),
-          ('pool2', MaxPool2DLayer),
-          ('dropout2', layers.DropoutLayer),
-          ('conv3', Conv2DLayer),
-          ('pool3', MaxPool2DLayer),
-          ('dropout3', layers.DropoutLayer),
-          ('hidden4', layers.DenseLayer),
-          ('dropout4', layers.DropoutLayer),
-          ('hidden5', layers.DenseLayer),
-          ('output', layers.DenseLayer),
-          ],
-      input_shape=(None, 3, PIXELS, PIXELS),
-      conv1_num_filters=32, conv1_filter_size=(3, 3), pool1_pool_size=(2, 2),
-      dropout1_p=0.1,
-      conv2_num_filters=64, conv2_filter_size=(2, 2), pool2_pool_size=(2, 2),
-      dropout2_p=0.2,
-      conv3_num_filters=128, conv3_filter_size=(2, 2), pool3_pool_size=(2, 2),
-      dropout3_p=0.3,
-      hidden4_num_units=1000,
-      dropout4_p=0.5,
-      hidden5_num_units=1000,
-      output_num_units=2, output_nonlinearity=nonlinearities.softmax,
-
-      update_learning_rate=theano.shared(float32(0.03)),
-      update_momentum=theano.shared(float32(0.9)),
-
-      regression=False,
-      batch_iterator_train=FlipBatchIterator(batch_size=128),
-      on_epoch_finished=[
-          AdjustVariable('update_learning_rate', start=0.03, stop=0.0001),
-          AdjustVariable('update_momentum', start=0.9, stop=0.999),
-          EarlyStopping(patience=200),
-          ],
-      max_epochs=50,
-      verbose=1,
-      )
-'''
-
-
-'''
 /media/iman/4E903A9B903A8A0B/Mix/Work/GitHub/Vision-Python-Snippits-2015-TiZii/src/lasagne/lasagne/init.py:86: UserWarning: The uniform initializer no longer uses Glorot et al.'s approach to determine the bounds, but defaults to the range (-0.01, 0.01) instead. Please use the new GlorotUniform initializer to get the old behavior. GlorotUniform is now the default for all layers.
   warnings.warn("The uniform initializer no longer uses Glorot et al.'s "
   input               (None, 3, 64, 64)     produces   12288 outputs
@@ -273,4 +227,50 @@ net = NeuralNet(
      49       0.02668       0.04430      0.60220      0.98730  81.47s
      50       0.02364       0.05151      0.45894      0.98730  81.58s
 iman@IMAN-E530:/media/iman/4E903A9B903A8A0B/Mix/Work/GitHub/Vision-Python-Snippits-2015-TiZii
+'''
+
+
+'''
+net = NeuralNet(
+      layers=[
+          ('input', layers.InputLayer),
+          ('conv1', Conv2DLayer),
+          ('pool1', MaxPool2DLayer),
+          ('dropout1', layers.DropoutLayer),
+          ('conv2', Conv2DLayer),
+          ('pool2', MaxPool2DLayer),
+          ('dropout2', layers.DropoutLayer),
+          ('conv3', Conv2DLayer),
+          ('pool3', MaxPool2DLayer),
+          ('dropout3', layers.DropoutLayer),
+          ('hidden4', layers.DenseLayer),
+          ('dropout4', layers.DropoutLayer),
+          ('hidden5', layers.DenseLayer),
+          ('output', layers.DenseLayer),
+          ],
+      input_shape=(None, 3, PIXELS, PIXELS),
+      conv1_num_filters=32, conv1_filter_size=(3, 3), pool1_pool_size=(2, 2),
+      dropout1_p=0.1,
+      conv2_num_filters=64, conv2_filter_size=(2, 2), pool2_pool_size=(2, 2),
+      dropout2_p=0.2,
+      conv3_num_filters=128, conv3_filter_size=(2, 2), pool3_pool_size=(2, 2),
+      dropout3_p=0.3,
+      hidden4_num_units=1000,
+      dropout4_p=0.5,
+      hidden5_num_units=1000,
+      output_num_units=2, output_nonlinearity=nonlinearities.softmax,
+
+      update_learning_rate=theano.shared(float32(0.03)),
+      update_momentum=theano.shared(float32(0.9)),
+
+      regression=False,
+      batch_iterator_train=FlipBatchIterator(batch_size=128),
+      on_epoch_finished=[
+          AdjustVariable('update_learning_rate', start=0.03, stop=0.0001),
+          AdjustVariable('update_momentum', start=0.9, stop=0.999),
+          EarlyStopping(patience=200),
+          ],
+      max_epochs=50,
+      verbose=1,
+      )
 '''
